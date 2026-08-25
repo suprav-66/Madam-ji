@@ -3,373 +3,3453 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>The Little Chaos Corner 🐈‍⬛</title>
+
 <style>
+
 :root{
-  --black:#03040a; --ink:#070b16; --navy:#0b1832; --blue:#173568;
-  --blue2:#31599a; --cherry:#761127; --red:#a51d3b; --rose:#d85a74;
-  --white:#f6f7fb; --muted:#a7afc3; --line:rgba(170,190,235,.14);
-  --glass:rgba(7,14,31,.78); --shadow:0 28px 90px rgba(0,0,0,.48);
+  --black:#03040a;
+  --ink:#070b16;
+  --navy:#0b1832;
+  --blue:#173568;
+  --blue2:#31599a;
+  --cherry:#761127;
+  --red:#a51d3b;
+  --rose:#d85a74;
+  --white:#f6f7fb;
+  --muted:#a7afc3;
+  --line:rgba(170,190,235,.14);
+  --glass:rgba(7,14,31,.78);
+  --shadow:0 28px 90px rgba(0,0,0,.48);
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
 body{
- margin:0;color:var(--white);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
- background:
- radial-gradient(circle at 50% 0%,rgba(23,53,104,.35),transparent 32%),
- radial-gradient(circle at 90% 65%,rgba(118,17,39,.2),transparent 28%),
- var(--black);
- overflow-x:hidden;
+  margin:0;
+  color:var(--white);
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(23,53,104,.35),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 90% 65%,
+      rgba(118,17,39,.2),
+      transparent 28%
+    ),
+    var(--black);
+
+  overflow-x:hidden;
 }
-button{font:inherit}
-a{color:inherit}
-#stars{position:fixed;inset:0;z-index:-3;overflow:hidden}
-.star{position:absolute;border-radius:50%;background:white;animation:twinkle 3s ease-in-out infinite}
-@keyframes twinkle{50%{opacity:.12;transform:scale(.55)}}
-.moon{position:fixed;right:8vw;top:7vh;width:110px;height:110px;border-radius:50%;
- background:linear-gradient(145deg,#f7f4e9,#b6c8ec);box-shadow:0 0 65px rgba(150,180,240,.25);z-index:-2}
-.moon:after{content:"";position:absolute;inset:10px -8px 0 20px;border-radius:50%;background:var(--black)}
-main{width:min(1100px,92%);margin:auto}
-.hero{min-height:100vh;display:grid;place-items:center;text-align:center;padding:70px 0}
-.eyebrow{text-transform:uppercase;letter-spacing:.2em;color:var(--rose);font-size:.72rem;margin-bottom:18px}
-h1{font-size:clamp(3.2rem,9vw,7rem);line-height:.88;letter-spacing:-.065em;margin:0 0 25px}
-.hero p{color:var(--muted);font-size:1.12rem;line-height:1.75}
-.primary,.secondary{border:0;border-radius:999px;padding:13px 21px;cursor:pointer;transition:.22s}
-.primary{color:#fff;background:linear-gradient(135deg,var(--blue2),var(--red));box-shadow:0 12px 35px rgba(118,17,39,.25)}
-.primary:hover,.secondary:hover{transform:translateY(-3px)}
-.secondary{color:var(--white);background:rgba(255,255,255,.05);border:1px solid var(--line)}
-.section{padding:85px 0}
-.section-title{text-align:center;margin-bottom:35px}
-.section-title h2{font-size:clamp(2rem,5vw,3.2rem);margin:0 0 10px}
-.section-title p{color:var(--muted);margin:0}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-.card{background:var(--glass);border:1px solid var(--line);border-radius:28px;padding:27px;box-shadow:var(--shadow);backdrop-filter:blur(18px)}
-.card h3{margin:0 0 8px}.card p{color:var(--muted);line-height:1.65}
-.full{grid-column:1/-1}
-.pillrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
-.pill{border:1px solid var(--line);background:rgba(255,255,255,.045);color:var(--white);padding:10px 13px;border-radius:15px;cursor:pointer}
-.pill.active,.pill:hover{background:linear-gradient(135deg,rgba(23,53,104,.7),rgba(118,17,39,.5))}
-.result{margin-top:20px;color:#e5a9b7;min-height:28px;font-weight:650}
-.kitty-stage{height:190px;position:relative;overflow:hidden;border-radius:22px;background:
- linear-gradient(180deg,rgba(23,53,104,.2),rgba(118,17,39,.12)),#050810;border:1px solid var(--line)}
-.kitty{position:absolute;font-size:4.4rem;left:12%;bottom:20px;cursor:pointer;user-select:none;transition:transform .2s}
-.kitty:hover{transform:scale(1.08) rotate(-5deg)}
-.paw{position:absolute;font-size:1.1rem;opacity:.35;animation:floatpaw 7s linear infinite}
-@keyframes floatpaw{from{transform:translateY(210px) rotate(0)}to{transform:translateY(-40px) rotate(180deg)}}
-.dance-zone{height:230px;border-radius:24px;display:grid;place-items:center;background:
- radial-gradient(circle at 50% 50%,rgba(49,89,154,.2),transparent 50%),#05070e;
- border:1px solid var(--line);overflow:hidden}
-.dancer{font-size:5rem;transition:.15s}
-.chaos .dancer{animation:dance .38s infinite alternate}
-.chaos .dance-zone{animation:flash .5s infinite alternate}
-@keyframes dance{from{transform:rotate(-15deg) translateY(8px) scale(.92)}to{transform:rotate(15deg) translateY(-12px) scale(1.08)}}
-@keyframes flash{from{box-shadow:inset 0 0 0 rgba(118,17,39,0)}to{box-shadow:inset 0 0 100px rgba(118,17,39,.2)}}
-.bookcase{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
-.book{min-height:125px;border:1px solid var(--line);border-radius:17px;padding:15px;cursor:pointer;background:linear-gradient(145deg,rgba(23,53,104,.38),rgba(118,17,39,.18));transition:.2s}
-.book:hover{transform:translateY(-5px)}
-.book b{display:block;margin-bottom:8px}
-.movie{font-size:4rem;text-align:center;margin:10px}
-.clue{border-left:2px solid var(--red);padding:12px 14px;background:rgba(118,17,39,.08);margin:10px 0;border-radius:0 12px 12px 0}
-.game-options{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}
-.option{padding:13px;border-radius:15px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:white;cursor:pointer;text-align:left}
-.option:hover{background:rgba(23,53,104,.35)}
-.petbattle{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:15px;text-align:center;margin-top:22px}
-.pet{font-size:4rem;cursor:pointer;padding:25px;border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.035)}
-.pet:hover{transform:translateY(-4px)}
-.vs{color:var(--rose);font-weight:800}
-.generator{font-size:1.15rem;line-height:1.8;padding:20px;border-radius:20px;background:rgba(23,53,104,.16);border:1px solid var(--line);min-height:115px}
-.breath{width:145px;height:145px;border-radius:50%;margin:25px auto;display:grid;place-items:center;
- background:radial-gradient(circle,rgba(118,17,39,.36),rgba(23,53,104,.16));border:1px solid var(--line);
- transition:transform 4s ease-in-out;box-shadow:0 0 70px rgba(118,17,39,.18)}
-.breath.inhale{transform:scale(1.35)}
-.center{text-align:center}
-.secret{display:none;margin-top:20px;padding:18px;border-radius:18px;background:rgba(118,17,39,.13);border:1px solid rgba(165,29,59,.2);line-height:1.65}
-footer{text-align:center;color:#6e7893;padding:40px 0 75px}
-.small{font-size:.82rem;color:#7d879f}
-#chaosScore{font-size:2rem;font-weight:800;color:var(--rose)}
+
+button{
+  font:inherit;
+}
+
+a{
+  color:inherit;
+}
+
+#stars{
+  position:fixed;
+  inset:0;
+  z-index:-3;
+  overflow:hidden;
+}
+
+.star{
+  position:absolute;
+  border-radius:50%;
+  background:white;
+  animation:twinkle 3s ease-in-out infinite;
+}
+
+@keyframes twinkle{
+  50%{
+    opacity:.12;
+    transform:scale(.55);
+  }
+}
+
+.moon{
+  position:fixed;
+  right:8vw;
+  top:7vh;
+  width:110px;
+  height:110px;
+  border-radius:50%;
+
+  background:linear-gradient(
+    145deg,
+    #f7f4e9,
+    #b6c8ec
+  );
+
+  box-shadow:
+    0 0 65px rgba(150,180,240,.25);
+
+  z-index:-2;
+}
+
+.moon:after{
+  content:"";
+  position:absolute;
+  inset:10px -8px 0 20px;
+  border-radius:50%;
+  background:var(--black);
+}
+
+main{
+  width:min(1100px,92%);
+  margin:auto;
+}
+
+.hero{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  padding:70px 0;
+}
+
+.eyebrow{
+  text-transform:uppercase;
+  letter-spacing:.2em;
+  color:var(--rose);
+  font-size:.72rem;
+  margin-bottom:18px;
+}
+
+h1{
+  font-size:clamp(3.2rem,9vw,7rem);
+  line-height:.88;
+  letter-spacing:-.065em;
+  margin:0 0 25px;
+}
+
+.hero p{
+  color:var(--muted);
+  font-size:1.12rem;
+  line-height:1.75;
+}
+
+.primary,
+.secondary{
+  border:0;
+  border-radius:999px;
+  padding:13px 21px;
+  cursor:pointer;
+  transition:.22s;
+}
+
+.primary{
+  color:#fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue2),
+      var(--red)
+    );
+
+  box-shadow:
+    0 12px 35px rgba(118,17,39,.25);
+}
+
+.primary:hover,
+.secondary:hover{
+  transform:translateY(-3px);
+}
+
+.secondary{
+  color:var(--white);
+  background:rgba(255,255,255,.05);
+  border:1px solid var(--line);
+}
+
+.section{
+  padding:85px 0;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:35px;
+}
+
+.section-title h2{
+  font-size:clamp(2rem,5vw,3.2rem);
+  margin:0 0 10px;
+}
+
+.section-title p{
+  color:var(--muted);
+  margin:0;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+}
+
+.card{
+  background:var(--glass);
+  border:1px solid var(--line);
+  border-radius:28px;
+  padding:27px;
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(18px);
+}
+
+.card h3{
+  margin:0 0 8px;
+}
+
+.card p{
+  color:var(--muted);
+  line-height:1.65;
+}
+
+.full{
+  grid-column:1/-1;
+}
+
+.pillrow{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:18px;
+}
+
+.pill{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.045);
+  color:var(--white);
+  padding:10px 13px;
+  border-radius:15px;
+  cursor:pointer;
+}
+
+.pill.active,
+.pill:hover{
+  background:
+    linear-gradient(
+      135deg,
+      rgba(23,53,104,.7),
+      rgba(118,17,39,.5)
+    );
+}
+
+.result{
+  margin-top:20px;
+  color:#e5a9b7;
+  min-height:28px;
+  font-weight:650;
+}
+
+.kitty-stage{
+  height:190px;
+  position:relative;
+  overflow:hidden;
+  border-radius:22px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(23,53,104,.2),
+      rgba(118,17,39,.12)
+    ),
+    #050810;
+
+  border:1px solid var(--line);
+}
+
+.kitty{
+  position:absolute;
+  font-size:4.4rem;
+  left:12%;
+  bottom:20px;
+  cursor:pointer;
+  user-select:none;
+  transition:transform .2s;
+}
+
+.kitty:hover{
+  transform:scale(1.08) rotate(-5deg);
+}
+
+.paw{
+  position:absolute;
+  font-size:1.1rem;
+  opacity:.35;
+  animation:floatpaw 7s linear infinite;
+}
+
+@keyframes floatpaw{
+  from{
+    transform:translateY(210px) rotate(0);
+  }
+
+  to{
+    transform:translateY(-40px) rotate(180deg);
+  }
+}
+
+.dance-zone{
+  height:230px;
+  border-radius:24px;
+  display:grid;
+  place-items:center;
+
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(49,89,154,.2),
+      transparent 50%
+    ),
+    #05070e;
+
+  border:1px solid var(--line);
+  overflow:hidden;
+}
+
+.dancer{
+  font-size:5rem;
+  transition:.15s;
+}
+
+.chaos .dancer{
+  animation:dance .38s infinite alternate;
+}
+
+.chaos .dance-zone{
+  animation:flash .5s infinite alternate;
+}
+
+@keyframes dance{
+  from{
+    transform:
+      rotate(-15deg)
+      translateY(8px)
+      scale(.92);
+  }
+
+  to{
+    transform:
+      rotate(15deg)
+      translateY(-12px)
+      scale(1.08);
+  }
+}
+
+@keyframes flash{
+  from{
+    box-shadow:
+      inset 0 0 0 rgba(118,17,39,0);
+  }
+
+  to{
+    box-shadow:
+      inset 0 0 100px rgba(118,17,39,.2);
+  }
+}
+
+.bookcase{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:20px;
+}
+
+.book{
+  min-height:125px;
+  border:1px solid var(--line);
+  border-radius:17px;
+  padding:15px;
+  cursor:pointer;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(23,53,104,.38),
+      rgba(118,17,39,.18)
+    );
+
+  transition:.2s;
+}
+
+.book:hover{
+  transform:translateY(-5px);
+}
+
+.book b{
+  display:block;
+  margin-bottom:8px;
+}
+
+.movie{
+  font-size:4rem;
+  text-align:center;
+  margin:10px;
+}
+
+.clue{
+  border-left:2px solid var(--red);
+  padding:12px 14px;
+  background:rgba(118,17,39,.08);
+  margin:10px 0;
+  border-radius:0 12px 12px 0;
+}
+
+.game-options{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-top:18px;
+}
+
+.option{
+  padding:13px;
+  border-radius:15px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.04);
+  color:white;
+  cursor:pointer;
+  text-align:left;
+}
+
+.option:hover{
+  background:rgba(23,53,104,.35);
+}
+
+.petbattle{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:15px;
+  text-align:center;
+  margin-top:22px;
+}
+
+.pet{
+  font-size:4rem;
+  cursor:pointer;
+  padding:25px;
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:rgba(255,255,255,.035);
+}
+
+.pet:hover{
+  transform:translateY(-4px);
+}
+
+.vs{
+  color:var(--rose);
+  font-weight:800;
+}
+
+.generator{
+  font-size:1.15rem;
+  line-height:1.8;
+  padding:20px;
+  border-radius:20px;
+  background:rgba(23,53,104,.16);
+  border:1px solid var(--line);
+  min-height:115px;
+}
+
+.breath{
+  width:145px;
+  height:145px;
+  border-radius:50%;
+  margin:25px auto;
+  display:grid;
+  place-items:center;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(118,17,39,.36),
+      rgba(23,53,104,.16)
+    );
+
+  border:1px solid var(--line);
+
+  transition:
+    transform 4s ease-in-out;
+
+  box-shadow:
+    0 0 70px rgba(118,17,39,.18);
+}
+
+.breath.inhale{
+  transform:scale(1.35);
+}
+
+.center{
+  text-align:center;
+}
+
+.secret{
+  display:none;
+  margin-top:20px;
+  padding:18px;
+  border-radius:18px;
+
+  background:rgba(118,17,39,.13);
+
+  border:
+    1px solid rgba(165,29,59,.2);
+
+  line-height:1.65;
+}
+
+footer{
+  text-align:center;
+  color:#6e7893;
+  padding:40px 0 75px;
+}
+
+.small{
+  font-size:.82rem;
+  color:#7d879f;
+}
+
+#chaosScore{
+  font-size:2rem;
+  font-weight:800;
+  color:var(--rose);
+}
+
+
+/* =========================================================
+   HER SECRET ROOM
+   ========================================================= */
+
+#roomEntrance{
+  margin-top:70px;
+  position:relative;
+  overflow:hidden;
+}
+
+.room-door-card{
+  position:relative;
+  min-height:300px;
+
+  display:grid;
+  place-items:center;
+  text-align:center;
+
+  border-radius:30px;
+  overflow:hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(49,89,154,.28),
+      transparent 45%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(7,14,31,.96),
+      rgba(55,12,28,.88)
+    );
+
+  border:
+    1px solid rgba(216,90,116,.25);
+
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.5);
+}
+
+.room-door-card:before{
+  content:"";
+  position:absolute;
+  width:280px;
+  height:280px;
+  border-radius:50%;
+
+  background:
+    rgba(216,90,116,.08);
+
+  filter:blur(20px);
+}
+
+.room-door-content{
+  position:relative;
+  z-index:2;
+}
+
+.room-door{
+  width:115px;
+  height:155px;
+  margin:20px auto;
+
+  border-radius:
+    60px 60px 8px 8px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #31599a,
+      #162b54 55%,
+      #761127
+    );
+
+  border:
+    2px solid rgba(255,255,255,.2);
+
+  box-shadow:
+    inset 0 0 30px rgba(255,255,255,.05),
+    0 15px 45px rgba(0,0,0,.45);
+
+  position:relative;
+  cursor:pointer;
+  transition:.4s ease;
+}
+
+.room-door:hover{
+  transform:
+    translateY(-8px)
+    scale(1.04);
+
+  box-shadow:
+    0 20px 60px rgba(216,90,116,.2),
+    inset 0 0 35px rgba(255,255,255,.08);
+}
+
+.room-door:after{
+  content:"🌷";
+  position:absolute;
+  font-size:28px;
+  right:15px;
+  bottom:20px;
+}
+
+.door-knob{
+  position:absolute;
+  right:15px;
+  top:50%;
+
+  width:10px;
+  height:10px;
+
+  border-radius:50%;
+  background:#f2d89b;
+
+  box-shadow:
+    0 0 12px #f2d89b;
+}
+
+.room-door-card h3{
+  margin:0;
+  font-size:1.7rem;
+}
+
+.room-door-card p{
+  color:var(--muted);
+  max-width:500px;
+  margin:10px auto;
+  line-height:1.6;
+}
+
+
+/* =========================================================
+   PASSWORD SCREEN
+   ========================================================= */
+
+#roomLock{
+  display:none;
+
+  position:fixed;
+  inset:0;
+  z-index:9999;
+
+  background:
+    radial-gradient(
+      circle at 50% 30%,
+      rgba(49,89,154,.2),
+      transparent 35%
+    ),
+    #03040a;
+
+  align-items:center;
+  justify-content:center;
+
+  padding:25px;
+}
+
+.lock-box{
+  width:min(480px,92%);
+
+  text-align:center;
+
+  padding:42px 30px;
+
+  border-radius:30px;
+
+  background:rgba(7,14,31,.9);
+
+  border:
+    1px solid rgba(216,90,116,.25);
+
+  box-shadow:
+    0 30px 100px rgba(0,0,0,.7);
+
+  backdrop-filter:blur(20px);
+}
+
+.lock-icon{
+  font-size:4rem;
+  margin-bottom:20px;
+
+  animation:
+    lockFloat 3s ease-in-out infinite;
+}
+
+@keyframes lockFloat{
+  50%{
+    transform:translateY(-7px);
+  }
+}
+
+.lock-box h2{
+  font-size:2.2rem;
+  margin:0 0 12px;
+}
+
+.lock-box p{
+  color:var(--muted);
+  line-height:1.7;
+}
+
+.secret-input{
+  width:100%;
+
+  padding:15px 18px;
+  margin:22px 0 12px;
+
+  border-radius:15px;
+
+  border:
+    1px solid var(--line);
+
+  outline:none;
+
+  background:
+    rgba(255,255,255,.05);
+
+  color:white;
+
+  font-size:1rem;
+
+  text-align:center;
+}
+
+.secret-input::placeholder{
+  color:#7d879f;
+}
+
+.secret-input:focus{
+  border-color:var(--rose);
+
+  box-shadow:
+    0 0 25px rgba(216,90,116,.12);
+}
+
+.lock-error{
+  min-height:24px;
+  color:#e58ca0;
+  margin-top:12px;
+}
+
+
+/* =========================================================
+   THE ROOM
+   ========================================================= */
+
+#secretRoom{
+  display:none;
+
+  position:fixed;
+  inset:0;
+
+  z-index:10000;
+
+  overflow:hidden;
+
+  color:#5c4545;
+
+  background:#d8c0b9;
+}
+
+.safe-room{
+  position:absolute;
+  inset:0;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #e8d2ce 0%,
+      #f2dfd9 67%,
+      #9a7467 67%,
+      #76574e 100%
+    );
+}
+
+.safe-room:before{
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(255,255,255,.25),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 80% 15%,
+      rgba(255,255,255,.18),
+      transparent 25%
+    );
+}
+
+
+/* WINDOW */
+
+.safe-window{
+  position:absolute;
+
+  width:min(260px,30vw);
+  height:min(300px,38vh);
+
+  right:8%;
+  top:9%;
+
+  border:
+    13px solid #765b59;
+
+  border-radius:18px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #263653 0%,
+      #6d617b 58%,
+      #9a7270 100%
+    );
+
+  box-shadow:
+    0 18px 45px rgba(70,45,42,.25);
+
+  overflow:hidden;
+}
+
+.safe-window:before{
+  content:"";
+
+  position:absolute;
+
+  left:50%;
+  top:0;
+  bottom:0;
+
+  width:6px;
+
+  background:#765b59;
+}
+
+.safe-window:after{
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  right:0;
+
+  top:48%;
+
+  height:6px;
+
+  background:#765b59;
+}
+
+.safe-moon{
+  position:absolute;
+
+  width:55px;
+  height:55px;
+
+  border-radius:50%;
+
+  background:#fff0c6;
+
+  right:28px;
+  top:25px;
+
+  box-shadow:
+    0 0 30px rgba(255,240,198,.7);
+}
+
+.safe-star{
+  position:absolute;
+  color:#fff4d4;
+  font-size:18px;
+}
+
+.safe-star.one{
+  left:25px;
+  top:45px;
+}
+
+.safe-star.two{
+  left:100px;
+  top:85px;
+}
+
+.safe-star.three{
+  right:25px;
+  top:125px;
+}
+
+
+/* BED */
+
+.safe-bed{
+  position:absolute;
+
+  left:11%;
+  bottom:19%;
+
+  width:min(720px,64vw);
+  height:245px;
+}
+
+.safe-headboard{
+  position:absolute;
+
+  left:0;
+  right:0;
+  bottom:65px;
+
+  height:180px;
+
+  border-radius:
+    35px 35px 0 0;
+
+  background:
+    linear-gradient(
+      145deg,
+      #76564f,
+      #9b746a
+    );
+
+  box-shadow:
+    0 12px 25px rgba(60,40,35,.2);
+}
+
+.safe-mattress{
+  position:absolute;
+
+  left:-12px;
+  right:-12px;
+  bottom:20px;
+
+  height:115px;
+
+  border-radius:28px;
+
+  background:#f7eee7;
+
+  box-shadow:
+    0 15px 25px rgba(50,35,30,.25);
+}
+
+.safe-blanket{
+  position:absolute;
+
+  right:-10px;
+  bottom:24px;
+
+  width:58%;
+  height:105px;
+
+  border-radius:35px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #d6aeb9,
+      #c895a5
+    );
+}
+
+.safe-pillow{
+  position:absolute;
+
+  left:25px;
+  bottom:88px;
+
+  width:190px;
+  height:65px;
+
+  border-radius:35px;
+
+  background:#fff8ef;
+
+  transform:rotate(-4deg);
+
+  box-shadow:
+    0 5px 12px rgba(70,45,40,.1);
+}
+
+.safe-pillow.two{
+  left:175px;
+  width:155px;
+
+  background:#ead8d1;
+
+  transform:rotate(5deg);
+}
+
+
+/* =========================================================
+   WOLF CUT GIRL
+   ========================================================= */
+
+.safe-girl{
+  position:absolute;
+
+  left:75px;
+  bottom:65px;
+
+  width:300px;
+  height:130px;
+
+  transform:rotate(-3deg);
+
+  z-index:5;
+}
+
+.girl-body{
+  position:absolute;
+
+  left:75px;
+  bottom:0;
+
+  width:185px;
+  height:90px;
+
+  border-radius:
+    60px 70px 35px 40px;
+
+  background:#b78f98;
+}
+
+.girl-head{
+  position:absolute;
+
+  left:15px;
+  bottom:43px;
+
+  width:82px;
+  height:82px;
+
+  border-radius:50%;
+
+  background:#e6b29f;
+
+  z-index:3;
+}
+
+
+/* wolf-cut hair */
+
+.girl-hair{
+  position:absolute;
+
+  left:-2px;
+  bottom:32px;
+
+  width:108px;
+  height:115px;
+
+  background:#30262b;
+
+  z-index:4;
+
+  clip-path:
+    polygon(
+      5% 0,
+      92% 5%,
+      100% 30%,
+      88% 53%,
+      100% 80%,
+      78% 67%,
+      67% 100%,
+      50% 71%,
+      34% 98%,
+      24% 68%,
+      0 78%,
+      12% 48%,
+      0 28%
+    );
+}
+
+.girl-eye{
+  position:absolute;
+
+  left:67px;
+  bottom:80px;
+
+  width:7px;
+  height:7px;
+
+  border-radius:50%;
+
+  background:#4a3739;
+
+  z-index:6;
+}
+
+.girl-arm{
+  position:absolute;
+
+  left:138px;
+  bottom:52px;
+
+  width:105px;
+  height:20px;
+
+  border-radius:20px;
+
+  background:#e6b29f;
+
+  transform:rotate(-12deg);
+
+  z-index:6;
+}
+
+.girl-tulips{
+  position:absolute;
+
+  left:145px;
+  bottom:62px;
+
+  font-size:33px;
+
+  z-index:7;
+
+  transform:rotate(-12deg);
+}
+
+
+/* =========================================================
+   SLEEPING CAT
+   ========================================================= */
+
+.room-cat{
+  position:absolute;
+
+  right:9%;
+  bottom:23%;
+
+  width:140px;
+  height:110px;
+
+  z-index:10;
+
+  animation:
+    catSleep 3s ease-in-out infinite;
+}
+
+@keyframes catSleep{
+  50%{
+    transform:translateY(-3px);
+  }
+}
+
+.room-cat-body{
+  position:absolute;
+
+  left:15px;
+  bottom:0;
+
+  width:110px;
+  height:65px;
+
+  border-radius:
+    55% 55% 40% 40%;
+
+  background:#777170;
+}
+
+.room-cat-head{
+  position:absolute;
+
+  left:35px;
+  bottom:45px;
+
+  width:72px;
+  height:65px;
+
+  border-radius:50%;
+
+  background:#777170;
+}
+
+.room-cat-ear{
+  position:absolute;
+
+  top:-16px;
+
+  width:29px;
+  height:38px;
+
+  background:#777170;
+
+  clip-path:
+    polygon(
+      50% 0,
+      100% 100%,
+      0 100%
+    );
+}
+
+.room-cat-ear.left{
+  left:5px;
+}
+
+.room-cat-ear.right{
+  right:5px;
+}
+
+.room-cat-eye{
+  position:absolute;
+
+  top:30px;
+
+  width:7px;
+  height:3px;
+
+  border-radius:50%;
+
+  background:#44393a;
+}
+
+.room-cat-eye.left{
+  left:18px;
+}
+
+.room-cat-eye.right{
+  right:18px;
+}
+
+.room-cat-tail{
+  position:absolute;
+
+  right:-25px;
+  bottom:25px;
+
+  width:65px;
+  height:55px;
+
+  border:
+    13px solid #777170;
+
+  border-left:0;
+  border-bottom:0;
+
+  border-radius:
+    0 50px 0 0;
+
+  transform:rotate(15deg);
+}
+
+
+/* =========================================================
+   TULIPS
+   ========================================================= */
+
+.room-tulips{
+  position:absolute;
+
+  left:5%;
+  bottom:22%;
+
+  font-size:50px;
+
+  letter-spacing:4px;
+
+  filter:
+    drop-shadow(
+      0 6px 4px rgba(60,40,35,.25)
+    );
+
+  z-index:4;
+}
+
+.room-vase{
+  position:absolute;
+
+  left:7%;
+  bottom:18%;
+
+  width:75px;
+  height:90px;
+
+  border-radius:
+    8px 8px 25px 25px;
+
+  background:#c5a29a;
+
+  z-index:3;
+}
+
+
+/* =========================================================
+   LAMP
+   ========================================================= */
+
+.room-lamp{
+  position:absolute;
+
+  left:4%;
+  bottom:24%;
+
+  width:90px;
+}
+
+.lamp-shade{
+  width:90px;
+  height:65px;
+
+  background:#d8b89e;
+
+  clip-path:
+    polygon(
+      18% 0,
+      82% 0,
+      100% 100%,
+      0 100%
+    );
+}
+
+.lamp-stand{
+  width:8px;
+  height:100px;
+
+  margin:auto;
+
+  background:#765850;
+}
+
+.lamp-base{
+  width:55px;
+  height:12px;
+
+  margin:auto;
+
+  border-radius:50%;
+
+  background:#765850;
+}
+
+
+/* =========================================================
+   ROOM MESSAGE
+   ========================================================= */
+
+.room-message{
+  position:absolute;
+
+  left:50%;
+  top:8%;
+
+  transform:translateX(-50%);
+
+  text-align:center;
+
+  z-index:20;
+
+  color:#674b4a;
+}
+
+.room-message h2{
+  margin:0;
+
+  font-family:Georgia,serif;
+
+  font-size:
+    clamp(
+      1.8rem,
+      4vw,
+      3rem
+    );
+
+  font-style:italic;
+}
+
+.room-message p{
+  margin:7px 0;
+  font-size:.9rem;
+}
+
+
+/* =========================================================
+   LETTER
+   ========================================================= */
+
+.room-letter{
+  position:absolute;
+
+  right:7%;
+  bottom:7%;
+
+  width:190px;
+
+  padding:18px;
+
+  background:#fff8ef;
+
+  border-radius:5px;
+
+  box-shadow:
+    0 12px 30px rgba(60,40,35,.25);
+
+  transform:rotate(2deg);
+
+  font-family:Georgia,serif;
+
+  color:#674b4a;
+
+  z-index:20;
+}
+
+.room-letter:before{
+  content:"💌";
+
+  display:block;
+
+  font-size:25px;
+
+  margin-bottom:8px;
+}
+
+.room-letter small{
+  display:block;
+
+  margin-top:8px;
+
+  opacity:.7;
+}
+
+
+/* =========================================================
+   FLOATING PETALS
+   ========================================================= */
+
+.room-petals{
+  position:absolute;
+
+  inset:0;
+
+  pointer-events:none;
+
+  z-index:30;
+
+  overflow:hidden;
+}
+
+.room-petal{
+  position:absolute;
+
+  top:-40px;
+
+  font-size:20px;
+
+  animation:
+    petalFall linear infinite;
+
+  opacity:.7;
+}
+
+@keyframes petalFall{
+
+  from{
+    transform:
+      translateY(-50px)
+      rotate(0deg);
+  }
+
+  to{
+    transform:
+      translateY(110vh)
+      rotate(360deg);
+  }
+
+}
+
+
+/* =========================================================
+   EXIT
+   ========================================================= */
+
+.leave-room{
+  position:absolute;
+
+  left:25px;
+  bottom:25px;
+
+  z-index:50;
+
+  border:
+    1px solid rgba(103,75,74,.25);
+
+  background:
+    rgba(255,248,239,.7);
+
+  color:#674b4a;
+
+  padding:11px 16px;
+
+  border-radius:999px;
+
+  cursor:pointer;
+
+  backdrop-filter:blur(8px);
+}
+
+.leave-room:hover{
+  transform:translateY(-2px);
+}
+
+
+/* =========================================================
+   ROOM OPENING
+   ========================================================= */
+
+#secretRoom.opening .safe-room{
+  animation:
+    roomReveal 1.6s ease forwards;
+}
+
+@keyframes roomReveal{
+
+  from{
+    opacity:0;
+    transform:scale(1.08);
+  }
+
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
 @media(max-width:720px){
- .grid{grid-template-columns:1fr}.full{grid-column:auto}
- .bookcase{grid-template-columns:1fr}.petbattle{grid-template-columns:1fr}.vs{order:2}
- .moon{width:75px;height:75px;right:5vw;top:4vh}
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .full{
+    grid-column:auto;
+  }
+
+  .bookcase{
+    grid-template-columns:1fr;
+  }
+
+  .petbattle{
+    grid-template-columns:1fr;
+  }
+
+  .vs{
+    order:2;
+  }
+
+  .moon{
+    width:75px;
+    height:75px;
+
+    right:5vw;
+    top:4vh;
+  }
+
+  .safe-window{
+    width:150px;
+    height:190px;
+
+    right:5%;
+    top:7%;
+  }
+
+  .safe-bed{
+    left:3%;
+
+    width:94%;
+
+    bottom:20%;
+
+    height:205px;
+  }
+
+  .safe-headboard{
+    height:140px;
+  }
+
+  .safe-girl{
+    left:25px;
+
+    transform:
+      scale(.8)
+      rotate(-3deg);
+
+    transform-origin:left bottom;
+  }
+
+  .room-cat{
+    right:4%;
+
+    transform:scale(.75);
+
+    transform-origin:right bottom;
+  }
+
+  .room-tulips,
+  .room-vase,
+  .room-lamp{
+    display:none;
+  }
+
+  .room-letter{
+    right:15px;
+    bottom:75px;
+
+    width:150px;
+
+    font-size:.78rem;
+  }
+
+  .room-message{
+    width:90%;
+    top:5%;
+  }
+
 }
+
 </style>
 </head>
+
+
 <body>
-<div id="stars"></div><div class="moon"></div>
+
+<div id="stars"></div>
+
+<div class="moon"></div>
+
 
 <main>
+
+
+<!-- =========================================================
+     HERO
+     ========================================================= -->
+
 <section class="hero" id="top">
- <div>
-  <div class="eyebrow">a tiny corner of the internet · 🐾</div>
-  <h1>The Little<br>Chaos Corner 🐈‍⬛</h1>
-  <p>
-   A place for dancing badly, reading too late,<br>
-   mysterious stories, tiny animals and questionable decisions.
-  </p>
-  <button class="primary" onclick="document.getElementById('world').scrollIntoView({behavior:'smooth'})">Enter the chaos →</button>
- </div>
+
+  <div>
+
+    <div class="eyebrow">
+      a tiny corner of the internet · 🐾
+    </div>
+
+    <h1>
+      The Little<br>
+      Chaos Corner 🐈‍⬛
+    </h1>
+
+    <p>
+      A place for dancing badly, reading too late,<br>
+      mysterious stories, tiny animals and questionable decisions.
+    </p>
+
+    <button
+      class="primary"
+      onclick="
+        document
+        .getElementById('world')
+        .scrollIntoView({behavior:'smooth'})
+      "
+    >
+      Enter the chaos →
+    </button>
+
+  </div>
+
 </section>
+
+
+<!-- =========================================================
+     PERSONALITY
+     ========================================================= -->
 
 <section class="section" id="world">
- <div class="section-title"><h2>Choose your current personality</h2><p>There are no consequences. Probably.</p></div>
- <div class="card">
-  <div class="pillrow">
-   <button class="pill" data-mood="dance">💃 Dance mode</button>
-   <button class="pill" data-mood="cat">🐈 Cat energy</button>
-   <button class="pill" data-mood="book">📖 Book goblin</button>
-   <button class="pill" data-mood="mystery">🕵️ Mystery mode</button>
-   <button class="pill" data-mood="chaos">🌀 Maximum chaos</button>
-   <button class="pill" data-mood="sleep">😴 Human battery: 2%</button>
+
+  <div class="section-title">
+
+    <h2>
+      Choose your current personality
+    </h2>
+
+    <p>
+      There are no consequences. Probably.
+    </p>
+
   </div>
-  <div class="result" id="moodResult"></div>
- </div>
+
+
+  <div class="card">
+
+    <div class="pillrow">
+
+      <button
+        class="pill"
+        data-mood="dance"
+      >
+        💃 Dance mode
+      </button>
+
+      <button
+        class="pill"
+        data-mood="cat"
+      >
+        🐈 Cat energy
+      </button>
+
+      <button
+        class="pill"
+        data-mood="book"
+      >
+        📖 Book goblin
+      </button>
+
+      <button
+        class="pill"
+        data-mood="mystery"
+      >
+        🕵️ Mystery mode
+      </button>
+
+      <button
+        class="pill"
+        data-mood="chaos"
+      >
+        🌀 Maximum chaos
+      </button>
+
+      <button
+        class="pill"
+        data-mood="sleep"
+      >
+        😴 Human battery: 2%
+      </button>
+
+    </div>
+
+    <div
+      class="result"
+      id="moodResult"
+    ></div>
+
+  </div>
+
 </section>
+
+
+<!-- =========================================================
+     MAIN FEATURES
+     ========================================================= -->
 
 <section class="section">
- <div class="grid">
-  <div class="card">
-   <h3>🐈‍⬛ The Cat Department</h3>
-   <p>There is a cat here. It has absolutely no official responsibilities.</p>
-   <div class="kitty-stage" id="kittyStage">
-    <div class="kitty" id="kitty">🐈‍⬛</div>
-    <span class="paw" style="left:20%;animation-delay:0s">🐾</span>
-    <span class="paw" style="left:45%;animation-delay:2s">🐾</span>
-    <span class="paw" style="left:72%;animation-delay:4s">🐾</span>
-   </div>
-   <div class="result" id="catResult">Click the cat.</div>
+
+  <div class="grid">
+
+
+    <!-- CAT -->
+
+    <div class="card">
+
+      <h3>
+        🐈‍⬛ The Cat Department
+      </h3>
+
+      <p>
+        There is a cat here.
+        It has absolutely no official responsibilities.
+      </p>
+
+      <div
+        class="kitty-stage"
+        id="kittyStage"
+      >
+
+        <div
+          class="kitty"
+          id="kitty"
+        >
+          🐈‍⬛
+        </div>
+
+        <span
+          class="paw"
+          style="left:20%;animation-delay:0s"
+        >
+          🐾
+        </span>
+
+        <span
+          class="paw"
+          style="left:45%;animation-delay:2s"
+        >
+          🐾
+        </span>
+
+        <span
+          class="paw"
+          style="left:72%;animation-delay:4s"
+        >
+          🐾
+        </span>
+
+      </div>
+
+      <div
+        class="result"
+        id="catResult"
+      >
+        Click the cat.
+      </div>
+
+    </div>
+
+
+    <!-- DANCE -->
+
+    <div class="card">
+
+      <h3>
+        💃 Dance Mode
+      </h3>
+
+      <p>
+        Press the button only if you're prepared
+        for completely unnecessary chaos.
+      </p>
+
+      <div
+        class="dance-zone"
+        id="danceZone"
+      >
+
+        <div
+          class="dancer"
+          id="dancer"
+        >
+          🕺
+        </div>
+
+      </div>
+
+      <div
+        class="center"
+        style="margin-top:16px"
+      >
+
+        <button
+          class="primary"
+          id="danceBtn"
+        >
+          ⚠ ENTER CHAOS MODE
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- LIBRARY -->
+
+    <div class="card full">
+
+      <h3>
+        📚 The Extremely Serious Library
+      </h3>
+
+      <p>
+        Choose a shelf.
+        We take reading very seriously here. Mostly.
+      </p>
+
+      <div class="bookcase">
+
+        <div
+          class="book"
+          data-book="novel"
+        >
+          <b>📖 NOVELS</b>
+
+          <span>
+            Read one chapter.
+            Accidentally finish half the book.
+          </span>
+        </div>
+
+        <div
+          class="book"
+          data-book="manga"
+        >
+          <b>📕 MANGA</b>
+
+          <span>
+            Just one more volume.
+            Famous last words.
+          </span>
+        </div>
+
+        <div
+          class="book"
+          data-book="anime"
+        >
+          <b>📺 ANIME</b>
+
+          <span>
+            One episode before bed.
+            Sure. Absolutely.
+          </span>
+        </div>
+
+      </div>
+
+      <div
+        class="result"
+        id="bookResult"
+      ></div>
+
+    </div>
+
+
+    <!-- MYSTERY -->
+
+    <div class="card">
+
+      <h3>
+        🎬 The Mystery Room
+      </h3>
+
+      <p>
+        A fictional mystery.
+        Three clues. One ridiculous answer.
+      </p>
+
+      <div class="movie">
+        🕯️
+      </div>
+
+      <div id="clues">
+
+        <div class="clue">
+          Clue 1:
+          The room was locked from the inside.
+        </div>
+
+        <div class="clue">
+          Clue 2:
+          Something smelled suspiciously like fish.
+        </div>
+
+        <div class="clue">
+          Clue 3:
+          Tiny footprints were found near the window.
+        </div>
+
+      </div>
+
+      <button
+        class="primary"
+        id="solveBtn"
+      >
+        Solve the mystery
+      </button>
+
+      <div
+        class="result"
+        id="mysteryResult"
+      ></div>
+
+    </div>
+
+
+    <!-- STORY -->
+
+    <div class="card">
+
+      <h3>
+        🌈 Story Mood Generator
+      </h3>
+
+      <p>
+        Pick a vibe and receive
+        a completely fictional story seed.
+      </p>
+
+      <div class="pillrow">
+
+        <button
+          class="pill storyMood"
+          data-story="soft"
+        >
+          🌸 Soft
+        </button>
+
+        <button
+          class="pill storyMood"
+          data-story="dramatic"
+        >
+          🔥 Dramatic
+        </button>
+
+        <button
+          class="pill storyMood"
+          data-story="mysterious"
+        >
+          🌙 Mysterious
+        </button>
+
+        <button
+          class="pill storyMood"
+          data-story="chaotic"
+        >
+          🌀 Chaotic
+        </button>
+
+      </div>
+
+      <div
+        class="generator"
+        id="storyResult"
+      >
+        Your next fictional universe is waiting...
+      </div>
+
+    </div>
+
+
+    <!-- PET BATTLE -->
+
+    <div class="card full">
+
+      <h3>
+        🐈 vs 🐕 The Most Important Scientific Question
+      </h3>
+
+      <p>
+        Choose your champion.
+        The scientific community is watching.
+      </p>
+
+      <div class="petbattle">
+
+        <button
+          class="pet"
+          data-pet="cat"
+        >
+          🐈‍⬛
+          <br>
+          <small>CAT</small>
+        </button>
+
+        <div class="vs">
+          VS
+        </div>
+
+        <button
+          class="pet"
+          data-pet="dog"
+        >
+          🐕
+          <br>
+          <small>DOG</small>
+        </button>
+
+      </div>
+
+      <div
+        class="result center"
+        id="petResult"
+      ></div>
+
+    </div>
+
+
+    <!-- QUIZ -->
+
+    <div class="card">
+
+      <h3>
+        🌀 How Crazy Are You?
+      </h3>
+
+      <p>
+        Answer three completely scientific questions.
+      </p>
+
+      <div id="quiz"></div>
+
+      <div id="chaosScore"></div>
+
+      <button
+        class="primary"
+        id="quizReset"
+      >
+        Start / Restart
+      </button>
+
+    </div>
+
+
+    <!-- BREATH -->
+
+    <div class="card center">
+
+      <h3>
+        🌿 One Tiny Reset
+      </h3>
+
+      <p>
+        Even chaos creatures need oxygen.
+      </p>
+
+      <div
+        class="breath"
+        id="breath"
+      >
+
+        <span id="breathText">
+          ready?
+        </span>
+
+      </div>
+
+      <button
+        class="primary"
+        id="breathBtn"
+      >
+        Start breathing
+      </button>
+
+      <p class="small">
+        inhale → hold → exhale
+      </p>
+
+    </div>
+
+
+    <!-- RANDOM -->
+
+    <div class="card full center">
+
+      <h3>
+        🎲 I AM BORED
+      </h3>
+
+      <p>
+        Press this button and accept your fate.
+      </p>
+
+      <button
+        class="primary"
+        id="randomBtn"
+      >
+        DO SOMETHING RANDOM
+      </button>
+
+      <div
+        class="generator"
+        id="randomResult"
+      >
+        Waiting for chaos...
+      </div>
+
+    </div>
+
+
+    <!-- SECRET -->
+
+    <div class="card full center">
+
+      <h3>
+        🔐 Suspicious Button
+      </h3>
+
+      <p>
+        There is definitely nothing interesting here.
+      </p>
+
+      <button
+        class="secondary"
+        id="secretBtn"
+      >
+        Investigate anyway
+      </button>
+
+      <div
+        class="secret"
+        id="secret"
+      >
+
+        You found a completely unnecessary secret. 😂
+
+        <br><br>
+
+        Achievement unlocked:
+        <b>
+          Professional Button Investigator
+        </b>
+        🏆
+
+        <br><br>
+
+        Your reward is permission
+        to do absolutely nothing for five minutes.
+
+      </div>
+
+    </div>
+
+
   </div>
 
-  <div class="card">
-   <h3>💃 Dance Mode</h3>
-   <p>Press the button only if you're prepared for completely unnecessary chaos.</p>
-   <div class="dance-zone" id="danceZone"><div class="dancer" id="dancer">🕺</div></div>
-   <div class="center" style="margin-top:16px">
-    <button class="primary" id="danceBtn">⚠ ENTER CHAOS MODE</button>
-   </div>
-  </div>
-
-  <div class="card full">
-   <h3>📚 The Extremely Serious Library</h3>
-   <p>Choose a shelf. We take reading very seriously here. Mostly.</p>
-   <div class="bookcase">
-    <div class="book" data-book="novel"><b>📖 NOVELS</b><span>Read one chapter. Accidentally finish half the book.</span></div>
-    <div class="book" data-book="manga"><b>📕 MANGA</b><span>Just one more volume. Famous last words.</span></div>
-    <div class="book" data-book="anime"><b>📺 ANIME</b><span>One episode before bed. Sure. Absolutely.</span></div>
-   </div>
-   <div class="result" id="bookResult"></div>
-  </div>
-
-  <div class="card">
-   <h3>🎬 The Mystery Room</h3>
-   <p>A fictional mystery. Three clues. One ridiculous answer.</p>
-   <div class="movie">🕯️</div>
-   <div id="clues">
-    <div class="clue">Clue 1: The room was locked from the inside.</div>
-    <div class="clue">Clue 2: Something smelled suspiciously like fish.</div>
-    <div class="clue">Clue 3: Tiny footprints were found near the window.</div>
-   </div>
-   <button class="primary" id="solveBtn">Solve the mystery</button>
-   <div class="result" id="mysteryResult"></div>
-  </div>
-
-  <div class="card">
-   <h3>🌈 Story Mood Generator</h3>
-   <p>Pick a vibe and receive a completely fictional story seed.</p>
-   <div class="pillrow">
-    <button class="pill storyMood" data-story="soft">🌸 Soft</button>
-    <button class="pill storyMood" data-story="dramatic">🔥 Dramatic</button>
-    <button class="pill storyMood" data-story="mysterious">🌙 Mysterious</button>
-    <button class="pill storyMood" data-story="chaotic">🌀 Chaotic</button>
-   </div>
-   <div class="generator" id="storyResult">Your next fictional universe is waiting...</div>
-  </div>
-
-  <div class="card full">
-   <h3>🐈 vs 🐕 The Most Important Scientific Question</h3>
-   <p>Choose your champion. The scientific community is watching.</p>
-   <div class="petbattle">
-    <button class="pet" data-pet="cat">🐈‍⬛<br><small>CAT</small></button>
-    <div class="vs">VS</div>
-    <button class="pet" data-pet="dog">🐕<br><small>DOG</small></button>
-   </div>
-   <div class="result center" id="petResult"></div>
-  </div>
-
-  <div class="card">
-   <h3>🌀 How Crazy Are You?</h3>
-   <p>Answer three completely scientific questions.</p>
-   <div id="quiz"></div>
-   <div id="chaosScore"></div>
-   <button class="primary" id="quizReset">Start / Restart</button>
-  </div>
-
-  <div class="card center">
-   <h3>🌿 One Tiny Reset</h3>
-   <p>Even chaos creatures need oxygen.</p>
-   <div class="breath" id="breath"><span id="breathText">ready?</span></div>
-   <button class="primary" id="breathBtn">Start breathing</button>
-   <p class="small">inhale → hold → exhale</p>
-  </div>
-
-  <div class="card full center">
-   <h3>🎲 I AM BORED</h3>
-   <p>Press this button and accept your fate.</p>
-   <button class="primary" id="randomBtn">DO SOMETHING RANDOM</button>
-   <div class="generator" id="randomResult">Waiting for chaos...</div>
-  </div>
-
-  <div class="card full center">
-   <h3>🔐 Suspicious Button</h3>
-   <p>There is definitely nothing interesting here.</p>
-   <button class="secondary" id="secretBtn">Investigate anyway</button>
-   <div class="secret" id="secret">
-    You found a completely unnecessary secret. 😂<br><br>
-    Achievement unlocked: <b>Professional Button Investigator</b> 🏆<br><br>
-    Your reward is permission to do absolutely nothing for five minutes.
-   </div>
-  </div>
- </div>
 </section>
 
-<footer>
- Made for tiny breaks, questionable decisions and good stories. 🐾
- <br><br><a href="#top" style="text-decoration:none">back to the moon ↑</a>
-</footer>
+
+<!-- =========================================================
+     HER SECRET ROOM ENTRANCE
+     ========================================================= -->
+
+<section
+  class="section"
+  id="roomEntrance"
+>
+
+  <div class="section-title">
+
+    <h2>
+      🌷 One More Little Place
+    </h2>
+
+    <p>
+      Somewhere inside this corner,
+      there is a room that belongs to someone.
+    </p>
+
+  </div>
+
+
+  <div class="room-door-card">
+
+    <div class="room-door-content">
+
+      <h3>
+        There is a room here...
+      </h3>
+
+      <p>
+        It's not for everyone.<br>
+        Maybe you'll know who it's for.
+      </p>
+
+
+      <div
+        class="room-door"
+        id="roomDoor"
+        title="Knock?"
+      >
+
+        <div class="door-knob"></div>
+
+      </div>
+
+
+      <button
+        class="primary"
+        id="enterRoomBtn"
+      >
+        Knock on the door 🌷
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
 </main>
 
+
+<!-- =========================================================
+     SECRET QUESTION
+     ========================================================= -->
+
+<div id="roomLock">
+
+  <div class="lock-box">
+
+    <div class="lock-icon">
+      🌷🔐
+    </div>
+
+    <h2>
+      Before you enter...
+    </h2>
+
+    <p>
+      This room isn't for everyone.<br>
+      There is one little question.
+    </p>
+
+    <p>
+      <b>
+        What do I call you?
+      </b>
+    </p>
+
+
+    <input
+      type="text"
+      id="roomPassword"
+      class="secret-input"
+      placeholder="Your answer..."
+      autocomplete="off"
+    >
+
+
+    <button
+      class="primary"
+      id="unlockRoomBtn"
+    >
+      Enter my room 🌷
+    </button>
+
+
+    <div
+      class="lock-error"
+      id="lockError"
+    ></div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     HER PRIVATE ROOM
+     ========================================================= -->
+
+<div id="secretRoom">
+
+  <div class="safe-room">
+
+
+    <!-- WINDOW -->
+
+    <div class="safe-window">
+
+      <div class="safe-moon"></div>
+
+      <span class="safe-star one">
+        ✦
+      </span>
+
+      <span class="safe-star two">
+        ✧
+      </span>
+
+      <span class="safe-star three">
+        ✦
+      </span>
+
+    </div>
+
+
+    <!-- ROOM MESSAGE -->
+
+    <div class="room-message">
+
+      <h2>
+        There you are, madam ji. 🌷
+      </h2>
+
+      <p>
+        Your little room was waiting for you.
+      </p>
+
+    </div>
+
+
+    <!-- LAMP -->
+
+    <div class="room-lamp">
+
+      <div class="lamp-shade"></div>
+
+      <div class="lamp-stand"></div>
+
+      <div class="lamp-base"></div>
+
+    </div>
+
+
+    <!-- TULIPS -->
+
+    <div class="room-vase"></div>
+
+    <div class="room-tulips">
+      🌷🌷🌷
+    </div>
+
+
+    <!-- BED -->
+
+    <div class="safe-bed">
+
+      <div class="safe-headboard"></div>
+
+      <div class="safe-mattress"></div>
+
+      <div class="safe-blanket"></div>
+
+      <div class="safe-pillow"></div>
+
+      <div class="safe-pillow two"></div>
+
+
+      <!-- GIRL -->
+
+      <div class="safe-girl">
+
+        <div class="girl-body"></div>
+
+        <div class="girl-head"></div>
+
+        <div class="girl-hair"></div>
+
+        <div class="girl-eye"></div>
+
+        <div class="girl-arm"></div>
+
+        <div class="girl-tulips">
+          🌷🌷
+        </div>
+
+      </div>
+
+
+      <!-- SLEEPING CAT -->
+
+      <div class="room-cat">
+
+        <div class="room-cat-body"></div>
+
+        <div class="room-cat-head"></div>
+
+        <div class="room-cat-ear left"></div>
+
+        <div class="room-cat-ear right"></div>
+
+        <div class="room-cat-eye left"></div>
+
+        <div class="room-cat-eye right"></div>
+
+        <div class="room-cat-tail"></div>
+
+      </div>
+
+    </div>
+
+
+    <!-- LETTER -->
+
+    <div class="room-letter">
+
+      You don't have to say anything.
+
+      <br><br>
+
+      You can just stay here for a while.
+
+      <small>
+        Someone was waiting.
+      </small>
+
+    </div>
+
+
+    <!-- FLOATING PETALS -->
+
+    <div class="room-petals">
+
+      <span
+        class="room-petal"
+        style="
+          left:8%;
+          animation-duration:10s;
+        "
+      >
+        🌷
+      </span>
+
+      <span
+        class="room-petal"
+        style="
+          left:24%;
+          animation-duration:13s;
+          animation-delay:2s;
+        "
+      >
+        ✿
+      </span>
+
+      <span
+        class="room-petal"
+        style="
+          left:42%;
+          animation-duration:9s;
+          animation-delay:4s;
+        "
+      >
+        🌷
+      </span>
+
+      <span
+        class="room-petal"
+        style="
+          left:61%;
+          animation-duration:12s;
+          animation-delay:1s;
+        "
+      >
+        ✿
+      </span>
+
+      <span
+        class="room-petal"
+        style="
+          left:78%;
+          animation-duration:10s;
+          animation-delay:3s;
+        "
+      >
+        🌷
+      </span>
+
+      <span
+        class="room-petal"
+        style="
+          left:91%;
+          animation-duration:14s;
+          animation-delay:5s;
+        "
+      >
+        ✿
+      </span>
+
+    </div>
+
+
+    <!-- EXIT -->
+
+    <button
+      class="leave-room"
+      id="leaveRoom"
+    >
+      ← Back to Little Chaos Corner
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+
+<footer>
+
+  Made for tiny breaks,
+  questionable decisions and good stories. 🐾
+
+  <br><br>
+
+  <a
+    href="#top"
+    style="text-decoration:none"
+  >
+    back to the moon ↑
+  </a>
+
+</footer>
+
+
 <script>
-const stars=document.getElementById('stars');
-for(let i=0;i<130;i++){
- const s=document.createElement('span');s.className='star';
- const size=1+Math.random()*2.5;s.style.width=size+'px';s.style.height=size+'px';
- s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';
- s.style.opacity=.15+Math.random()*.7;s.style.animationDelay=Math.random()*4+'s';
- stars.appendChild(s);
+
+
+/* =========================================================
+   STARS
+   ========================================================= */
+
+const stars =
+  document.getElementById("stars");
+
+for(let i = 0; i < 130; i++){
+
+  const s =
+    document.createElement("span");
+
+  s.className = "star";
+
+  const size =
+    1 + Math.random() * 2.5;
+
+  s.style.width =
+    size + "px";
+
+  s.style.height =
+    size + "px";
+
+  s.style.left =
+    Math.random() * 100 + "%";
+
+  s.style.top =
+    Math.random() * 100 + "%";
+
+  s.style.opacity =
+    .15 + Math.random() * .7;
+
+  s.style.animationDelay =
+    Math.random() * 4 + "s";
+
+  stars.appendChild(s);
 }
 
-const moodText={
- dance:"The floor is now legally considered a dance floor. 💃",
- cat:"No thoughts. Only paws. 🐾",
- book:"Cancel all plans. There is a chapter to finish. 📖",
- mystery:"Trust nobody. Especially the cat. 🕵️",
- chaos:"Excellent. Please keep all limbs inside the vehicle. 🌀",
- sleep:"Battery critically low. Find blanket immediately. 😴"
-};
-document.querySelectorAll('[data-mood]').forEach(b=>{
- b.addEventListener('click',()=>{
-  document.querySelectorAll('[data-mood]').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active');document.getElementById('moodResult').textContent=moodText[b.dataset.mood];
- });
-});
 
-const catLines=[
- "The cat has judged you. Verdict: acceptable.",
- "Meow. That was the entire message.",
- "The cat requests snacks.",
- "You clicked the cat. The cat will remember this.",
- "The cat is pretending not to care.",
- "🐾 *tiny suspicious stare*",
- "The cat has important cat business. Please leave."
+/* =========================================================
+   PERSONALITY
+   ========================================================= */
+
+const moodText = {
+
+  dance:
+    "The floor is now legally considered a dance floor. 💃",
+
+  cat:
+    "No thoughts. Only paws. 🐾",
+
+  book:
+    "Cancel all plans. There is a chapter to finish. 📖",
+
+  mystery:
+    "Trust nobody. Especially the cat. 🕵️",
+
+  chaos:
+    "Excellent. Please keep all limbs inside the vehicle. 🌀",
+
+  sleep:
+    "Battery critically low. Find blanket immediately. 😴"
+
+};
+
+
+document
+  .querySelectorAll("[data-mood]")
+  .forEach(button => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        document
+          .querySelectorAll("[data-mood]")
+          .forEach(
+            x =>
+              x.classList.remove("active")
+          );
+
+        button.classList.add("active");
+
+        document
+          .getElementById("moodResult")
+          .textContent =
+            moodText[
+              button.dataset.mood
+            ];
+
+      }
+    );
+
+  });
+
+
+/* =========================================================
+   CAT
+   ========================================================= */
+
+const catLines = [
+
+  "The cat has judged you. Verdict: acceptable.",
+
+  "Meow. That was the entire message.",
+
+  "The cat requests snacks.",
+
+  "You clicked the cat. The cat will remember this.",
+
+  "The cat is pretending not to care.",
+
+  "🐾 *tiny suspicious stare*",
+
+  "The cat has important cat business. Please leave."
+
 ];
-document.getElementById('kitty').addEventListener('click',()=>{
- document.getElementById('catResult').textContent=catLines[Math.floor(Math.random()*catLines.length)];
- const k=document.getElementById('kitty');k.style.transform='scale(1.25) rotate('+(Math.random()*20-10)+'deg)';
- setTimeout(()=>k.style.transform='',300);
-});
 
-const danceBtn=document.getElementById('danceBtn'),zone=document.getElementById('danceZone');
-danceBtn.addEventListener('click',()=>{
- zone.classList.toggle('chaos');
- danceBtn.textContent=zone.classList.contains('chaos')?'🛑 PLEASE STOP THE CHAOS':'⚠ ENTER CHAOS MODE';
- document.getElementById('dancer').textContent=zone.classList.contains('chaos')?'💃':'🕺';
-});
 
-const bookText={
- novel:"Plot twist: the 'one chapter' has become four chapters. There is no escape.",
- manga:"Volume acquired. Self-control has left the building.",
- anime:"Episode 1 at 9 PM. Episode 11 at 2:47 AM. A classic scientific phenomenon."
+document
+  .getElementById("kitty")
+  .addEventListener(
+    "click",
+    () => {
+
+      document
+        .getElementById("catResult")
+        .textContent =
+          catLines[
+            Math.floor(
+              Math.random() *
+              catLines.length
+            )
+          ];
+
+      const k =
+        document.getElementById("kitty");
+
+      k.style.transform =
+        "scale(1.25) rotate(" +
+        (Math.random() * 20 - 10) +
+        "deg)";
+
+      setTimeout(
+        () => {
+          k.style.transform = "";
+        },
+        300
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   DANCE
+   ========================================================= */
+
+const danceBtn =
+  document.getElementById("danceBtn");
+
+const zone =
+  document.getElementById("danceZone");
+
+
+danceBtn.addEventListener(
+  "click",
+  () => {
+
+    zone.classList.toggle("chaos");
+
+    danceBtn.textContent =
+      zone.classList.contains("chaos")
+      ? "🛑 PLEASE STOP THE CHAOS"
+      : "⚠ ENTER CHAOS MODE";
+
+    document
+      .getElementById("dancer")
+      .textContent =
+        zone.classList.contains("chaos")
+        ? "💃"
+        : "🕺";
+
+  }
+);
+
+
+/* =========================================================
+   BOOKS
+   ========================================================= */
+
+const bookText = {
+
+  novel:
+    "Plot twist: the 'one chapter' has become four chapters. There is no escape.",
+
+  manga:
+    "Volume acquired. Self-control has left the building.",
+
+  anime:
+    "Episode 1 at 9 PM. Episode 11 at 2:47 AM. A classic scientific phenomenon."
+
 };
-document.querySelectorAll('.book').forEach(b=>b.addEventListener('click',()=>{
- document.getElementById('bookResult').textContent=bookText[b.dataset.book];
-}));
 
-document.getElementById('solveBtn').addEventListener('click',()=>{
- document.getElementById('mysteryResult').textContent=
- "CASE SOLVED: The cat did it. Obviously. It wanted the fish and the locked room was merely dramatic flair. 🐈‍⬛";
-});
 
-const stories={
- soft:["Two strangers keep leaving handwritten notes inside the same library book, never knowing they are reading each other's thoughts."],
- dramatic:["A forgotten train arrives at midnight once every ten years. One passenger boards knowing they may never return."],
- mysterious:["Every night at 2:13 AM, one window in an empty building lights up. Tonight, someone waves from inside."],
- chaotic:["A perfectly ordinary student wakes up with a magical cat, a stolen crown, and absolutely no memory of yesterday."]
+document
+  .querySelectorAll(".book")
+  .forEach(book => {
+
+    book.addEventListener(
+      "click",
+      () => {
+
+        document
+          .getElementById("bookResult")
+          .textContent =
+            bookText[
+              book.dataset.book
+            ];
+
+      }
+    );
+
+  });
+
+
+/* =========================================================
+   MYSTERY
+   ========================================================= */
+
+document
+  .getElementById("solveBtn")
+  .addEventListener(
+    "click",
+    () => {
+
+      document
+        .getElementById("mysteryResult")
+        .textContent =
+          "CASE SOLVED: The cat did it. Obviously. It wanted the fish and the locked room was merely dramatic flair. 🐈‍⬛";
+
+    }
+  );
+
+
+/* =========================================================
+   STORIES
+   ========================================================= */
+
+const stories = {
+
+  soft:
+    "Two strangers keep leaving handwritten notes inside the same library book, never knowing they are reading each other's thoughts.",
+
+  dramatic:
+    "A forgotten train arrives at midnight once every ten years. One passenger boards knowing they may never return.",
+
+  mysterious:
+    "Every night at 2:13 AM, one window in an empty building lights up. Tonight, someone waves from inside.",
+
+  chaotic:
+    "A perfectly ordinary student wakes up with a magical cat, a stolen crown, and absolutely no memory of yesterday."
+
 };
-document.querySelectorAll('.storyMood').forEach(b=>b.addEventListener('click',()=>{
- document.getElementById('storyResult').textContent=stories[b.dataset.story][0];
-}));
 
-document.querySelectorAll('.pet').forEach(p=>p.addEventListener('click',()=>{
- const pet=p.dataset.pet;
- const text=pet==='cat'
- ? "CAT WINS. The judges were intimidated by the stare. 🐈‍⬛🏆"
- : "DOG WINS. Pure enthusiasm has defeated logic. 🐕🏆";
- document.getElementById('petResult').textContent=text;
-}));
 
-const questions=[
- {q:"It's 2 AM. What are you doing?",a:["Sleeping like a responsible human","Reading / manga","Watching one more episode","Questioning existence"]},
- {q:"You see a mysterious door.",a:["Walk away","Open it carefully","Kick it open dramatically","Ask the cat first"]},
- {q:"You have one free evening.",a:["Rest","Read","Watch something","Invent a completely unnecessary adventure"]}
+document
+  .querySelectorAll(".storyMood")
+  .forEach(button => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        document
+          .getElementById("storyResult")
+          .textContent =
+            stories[
+              button.dataset.story
+            ];
+
+      }
+    );
+
+  });
+
+
+/* =========================================================
+   PET BATTLE
+   ========================================================= */
+
+document
+  .querySelectorAll(".pet")
+  .forEach(pet => {
+
+    pet.addEventListener(
+      "click",
+      () => {
+
+        const type =
+          pet.dataset.pet;
+
+        const text =
+          type === "cat"
+
+          ? "CAT WINS. The judges were intimidated by the stare. 🐈‍⬛🏆"
+
+          : "DOG WINS. Pure enthusiasm has defeated logic. 🐕🏆";
+
+        document
+          .getElementById("petResult")
+          .textContent = text;
+
+      }
+    );
+
+  });
+
+
+/* =========================================================
+   QUIZ
+   ========================================================= */
+
+const questions = [
+
+  {
+    q:"It's 2 AM. What are you doing?",
+
+    a:[
+      "Sleeping like a responsible human",
+      "Reading / manga",
+      "Watching one more episode",
+      "Questioning existence"
+    ]
+  },
+
+  {
+    q:"You see a mysterious door.",
+
+    a:[
+      "Walk away",
+      "Open it carefully",
+      "Kick it open dramatically",
+      "Ask the cat first"
+    ]
+  },
+
+  {
+    q:"You have one free evening.",
+
+    a:[
+      "Rest",
+      "Read",
+      "Watch something",
+      "Invent a completely unnecessary adventure"
+    ]
+  }
+
 ];
-let qi=0,score=0;
+
+
+let qi = 0;
+let score = 0;
+
+
 function renderQuiz(){
- const box=document.getElementById('quiz');
- if(qi>=questions.length){
-  let msg=score<=2?"Mildly chaotic. Suspiciously responsible.":score<=5?"Certified little chaos creature™.":"ABSOLUTE MENACE. The cat is proud.";
-  document.getElementById('chaosScore').textContent=msg;
-  box.innerHTML="";
-  return;
- }
- const q=questions[qi];
- box.innerHTML='<p><b>'+q.q+'</b></p>'+q.a.map((x,i)=>'<button class="option" data-i="'+i+'">'+x+'</button>').join('');
- box.querySelectorAll('.option').forEach(b=>b.addEventListener('click',()=>{
-  score+=Number(b.dataset.i);qi++;renderQuiz();
- }));
+
+  const box =
+    document.getElementById("quiz");
+
+  if(qi >= questions.length){
+
+    let msg =
+      score <= 2
+      ? "Mildly chaotic. Suspiciously responsible."
+
+      : score <= 5
+      ? "Certified little chaos creature™."
+
+      : "ABSOLUTE MENACE. The cat is proud.";
+
+    document
+      .getElementById("chaosScore")
+      .textContent = msg;
+
+    box.innerHTML = "";
+
+    return;
+  }
+
+
+  const q =
+    questions[qi];
+
+
+  box.innerHTML =
+    "<p><b>" +
+    q.q +
+    "</b></p>" +
+
+    q.a
+      .map(
+        (x,i) =>
+          '<button class="option" data-i="' +
+          i +
+          '">' +
+          x +
+          "</button>"
+      )
+      .join("");
+
+
+  box
+    .querySelectorAll(".option")
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          score +=
+            Number(
+              button.dataset.i
+            );
+
+          qi++;
+
+          renderQuiz();
+
+        }
+      );
+
+    });
+
 }
-document.getElementById('quizReset').addEventListener('click',()=>{qi=0;score=0;document.getElementById('chaosScore').textContent='';renderQuiz()});
+
+
+document
+  .getElementById("quizReset")
+  .addEventListener(
+    "click",
+    () => {
+
+      qi = 0;
+      score = 0;
+
+      document
+        .getElementById("chaosScore")
+        .textContent = "";
+
+      renderQuiz();
+
+    }
+  );
+
+
 renderQuiz();
 
-const breath=document.getElementById('breath'),bt=document.getElementById('breathText'),bb=document.getElementById('breathBtn');
-let breathing=false,timer;
-function cycle(){
- if(!breathing)return;
- bt.textContent='inhale';breath.classList.add('inhale');
- timer=setTimeout(()=>{if(!breathing)return;bt.textContent='hold';
-  timer=setTimeout(()=>{if(!breathing)return;bt.textContent='exhale';breath.classList.remove('inhale');
-   timer=setTimeout(cycle,4000)},2000)
- },4000)
-}
-bb.addEventListener('click',()=>{breathing=!breathing;clearTimeout(timer);
- if(breathing){bb.textContent='Stop';cycle()}else{bb.textContent='Start breathing';bt.textContent='ready?';breath.classList.remove('inhale')}});
 
-const randomThings=[
-"Do a completely unnecessary dance for 20 seconds. 💃",
-"Find the nearest animal and respectfully admire it. 🐾",
-"Read one page of something you like.",
-"Make up a fictional character with the worst superpower possible.",
-"Look outside for one minute and find the weirdest thing you can see.",
-"Send someone a ridiculous sticker.",
-"Learn one random fact.",
-"Draw a cat without lifting the pen from the page.",
-"Put on one song and pretend you're in an anime opening.",
-"Drink some water. Yes, this counts as an adventure."
+/* =========================================================
+   BREATHING
+   ========================================================= */
+
+const breath =
+  document.getElementById("breath");
+
+const bt =
+  document.getElementById("breathText");
+
+const bb =
+  document.getElementById("breathBtn");
+
+let breathing = false;
+let timer;
+
+
+function cycle(){
+
+  if(!breathing){
+    return;
+  }
+
+
+  bt.textContent = "inhale";
+
+  breath.classList.add("inhale");
+
+
+  timer =
+    setTimeout(
+      () => {
+
+        if(!breathing){
+          return;
+        }
+
+        bt.textContent = "hold";
+
+
+        timer =
+          setTimeout(
+            () => {
+
+              if(!breathing){
+                return;
+              }
+
+              bt.textContent = "exhale";
+
+              breath.classList.remove(
+                "inhale"
+              );
+
+
+              timer =
+                setTimeout(
+                  cycle,
+                  4000
+                );
+
+            },
+            2000
+          );
+
+      },
+      4000
+    );
+
+}
+
+
+bb.addEventListener(
+  "click",
+  () => {
+
+    breathing =
+      !breathing;
+
+    clearTimeout(timer);
+
+
+    if(breathing){
+
+      bb.textContent = "Stop";
+
+      cycle();
+
+    }
+
+    else{
+
+      bb.textContent =
+        "Start breathing";
+
+      bt.textContent =
+        "ready?";
+
+      breath.classList.remove(
+        "inhale"
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   RANDOM
+   ========================================================= */
+
+const randomThings = [
+
+  "Do a completely unnecessary dance for 20 seconds. 💃",
+
+  "Find the nearest animal and respectfully admire it. 🐾",
+
+  "Read one page of something you like.",
+
+  "Make up a fictional character with the worst superpower possible.",
+
+  "Look outside for one minute and find the weirdest thing you can see.",
+
+  "Send someone a ridiculous sticker.",
+
+  "Learn one random fact.",
+
+  "Draw a cat without lifting the pen from the page.",
+
+  "Put on one song and pretend you're in an anime opening.",
+
+  "Drink some water. Yes, this counts as an adventure."
+
 ];
-document.getElementById('randomBtn').addEventListener('click',()=>{
- document.getElementById('randomResult').textContent=randomThings[Math.floor(Math.random()*randomThings.length)];
-});
-document.getElementById('secretBtn').addEventListener('click',()=>{
- const x=document.getElementById('secret');x.style.display=x.style.display==='block'?'none':'block';
-});
+
+
+document
+  .getElementById("randomBtn")
+  .addEventListener(
+    "click",
+    () => {
+
+      document
+        .getElementById("randomResult")
+        .textContent =
+          randomThings[
+            Math.floor(
+              Math.random() *
+              randomThings.length
+            )
+          ];
+
+    }
+  );
+
+
+/* =========================================================
+   SUSPICIOUS BUTTON
+   ========================================================= */
+
+document
+  .getElementById("secretBtn")
+  .addEventListener(
+    "click",
+    () => {
+
+      const secret =
+        document.getElementById("secret");
+
+      secret.style.display =
+        secret.style.display === "block"
+        ? "none"
+        : "block";
+
+    }
+  );
+
+
+/* =========================================================
+   🌷 HER SECRET ROOM
+   ========================================================= */
+
+const roomEntranceButton =
+  document.getElementById(
+    "enterRoomBtn"
+  );
+
+const roomDoor =
+  document.getElementById(
+    "roomDoor"
+  );
+
+const roomLock =
+  document.getElementById(
+    "roomLock"
+  );
+
+const roomPassword =
+  document.getElementById(
+    "roomPassword"
+  );
+
+const unlockRoomBtn =
+  document.getElementById(
+    "unlockRoomBtn"
+  );
+
+const secretRoom =
+  document.getElementById(
+    "secretRoom"
+  );
+
+const lockError =
+  document.getElementById(
+    "lockError"
+  );
+
+const leaveRoom =
+  document.getElementById(
+    "leaveRoom"
+  );
+
+
+/* =========================================================
+   OPEN QUESTION
+   ========================================================= */
+
+function openRoomQuestion(){
+
+  roomLock.style.display = "flex";
+
+  setTimeout(
+    () => {
+      roomPassword.focus();
+    },
+    200
+  );
+
+}
+
+
+roomDoor.addEventListener(
+  "click",
+  openRoomQuestion
+);
+
+
+roomEntranceButton.addEventListener(
+  "click",
+  openRoomQuestion
+);
+
+
+/* =========================================================
+   UNLOCK
+   ========================================================= */
+
+function tryUnlockRoom(){
+
+  const answer =
+    roomPassword.value
+      .trim()
+      .toLowerCase();
+
+
+  /*
+    The special answer:
+    madam ji
+  */
+
+  if(answer === "madam ji"){
+
+    lockError.textContent = "";
+
+    roomLock.style.display =
+      "none";
+
+    secretRoom.style.display =
+      "block";
+
+    secretRoom.classList.add(
+      "opening"
+    );
+
+    document.body.style.overflow =
+      "hidden";
+
+
+    setTimeout(
+      () => {
+
+        secretRoom.classList.remove(
+          "opening"
+        );
+
+      },
+      1700
+    );
+
+  }
+
+  else{
+
+    lockError.textContent =
+      "Hmm... that's not what I call you. Try again. 🌷";
+
+    roomPassword.value = "";
+
+    roomPassword.focus();
+
+  }
+
+}
+
+
+unlockRoomBtn.addEventListener(
+  "click",
+  tryUnlockRoom
+);
+
+
+/* =========================================================
+   ENTER KEY
+   ========================================================= */
+
+roomPassword.addEventListener(
+  "keydown",
+  function(event){
+
+    if(event.key === "Enter"){
+
+      tryUnlockRoom();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   LEAVE ROOM
+   ========================================================= */
+
+leaveRoom.addEventListener(
+  "click",
+  function(){
+
+    secretRoom.style.display =
+      "none";
+
+    document.body.style.overflow =
+      "";
+
+    roomPassword.value =
+      "";
+
+    lockError.textContent =
+      "";
+
+  }
+);
+
 </script>
+
 </body>
 </html>
