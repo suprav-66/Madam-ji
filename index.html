@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Little Chaos Corner 🐈‍⬛</title>
+<style>
+:root{
+  --black:#03040a; --ink:#070b16; --navy:#0b1832; --blue:#173568;
+  --blue2:#31599a; --cherry:#761127; --red:#a51d3b; --rose:#d85a74;
+  --white:#f6f7fb; --muted:#a7afc3; --line:rgba(170,190,235,.14);
+  --glass:rgba(7,14,31,.78); --shadow:0 28px 90px rgba(0,0,0,.48);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ margin:0;color:var(--white);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+ background:
+ radial-gradient(circle at 50% 0%,rgba(23,53,104,.35),transparent 32%),
+ radial-gradient(circle at 90% 65%,rgba(118,17,39,.2),transparent 28%),
+ var(--black);
+ overflow-x:hidden;
+}
+button{font:inherit}
+a{color:inherit}
+#stars{position:fixed;inset:0;z-index:-3;overflow:hidden}
+.star{position:absolute;border-radius:50%;background:white;animation:twinkle 3s ease-in-out infinite}
+@keyframes twinkle{50%{opacity:.12;transform:scale(.55)}}
+.moon{position:fixed;right:8vw;top:7vh;width:110px;height:110px;border-radius:50%;
+ background:linear-gradient(145deg,#f7f4e9,#b6c8ec);box-shadow:0 0 65px rgba(150,180,240,.25);z-index:-2}
+.moon:after{content:"";position:absolute;inset:10px -8px 0 20px;border-radius:50%;background:var(--black)}
+main{width:min(1100px,92%);margin:auto}
+.hero{min-height:100vh;display:grid;place-items:center;text-align:center;padding:70px 0}
+.eyebrow{text-transform:uppercase;letter-spacing:.2em;color:var(--rose);font-size:.72rem;margin-bottom:18px}
+h1{font-size:clamp(3.2rem,9vw,7rem);line-height:.88;letter-spacing:-.065em;margin:0 0 25px}
+.hero p{color:var(--muted);font-size:1.12rem;line-height:1.75}
+.primary,.secondary{border:0;border-radius:999px;padding:13px 21px;cursor:pointer;transition:.22s}
+.primary{color:#fff;background:linear-gradient(135deg,var(--blue2),var(--red));box-shadow:0 12px 35px rgba(118,17,39,.25)}
+.primary:hover,.secondary:hover{transform:translateY(-3px)}
+.secondary{color:var(--white);background:rgba(255,255,255,.05);border:1px solid var(--line)}
+.section{padding:85px 0}
+.section-title{text-align:center;margin-bottom:35px}
+.section-title h2{font-size:clamp(2rem,5vw,3.2rem);margin:0 0 10px}
+.section-title p{color:var(--muted);margin:0}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.card{background:var(--glass);border:1px solid var(--line);border-radius:28px;padding:27px;box-shadow:var(--shadow);backdrop-filter:blur(18px)}
+.card h3{margin:0 0 8px}.card p{color:var(--muted);line-height:1.65}
+.full{grid-column:1/-1}
+.pillrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.pill{border:1px solid var(--line);background:rgba(255,255,255,.045);color:var(--white);padding:10px 13px;border-radius:15px;cursor:pointer}
+.pill.active,.pill:hover{background:linear-gradient(135deg,rgba(23,53,104,.7),rgba(118,17,39,.5))}
+.result{margin-top:20px;color:#e5a9b7;min-height:28px;font-weight:650}
+.kitty-stage{height:190px;position:relative;overflow:hidden;border-radius:22px;background:
+ linear-gradient(180deg,rgba(23,53,104,.2),rgba(118,17,39,.12)),#050810;border:1px solid var(--line)}
+.kitty{position:absolute;font-size:4.4rem;left:12%;bottom:20px;cursor:pointer;user-select:none;transition:transform .2s}
+.kitty:hover{transform:scale(1.08) rotate(-5deg)}
+.paw{position:absolute;font-size:1.1rem;opacity:.35;animation:floatpaw 7s linear infinite}
+@keyframes floatpaw{from{transform:translateY(210px) rotate(0)}to{transform:translateY(-40px) rotate(180deg)}}
+.dance-zone{height:230px;border-radius:24px;display:grid;place-items:center;background:
+ radial-gradient(circle at 50% 50%,rgba(49,89,154,.2),transparent 50%),#05070e;
+ border:1px solid var(--line);overflow:hidden}
+.dancer{font-size:5rem;transition:.15s}
+.chaos .dancer{animation:dance .38s infinite alternate}
+.chaos .dance-zone{animation:flash .5s infinite alternate}
+@keyframes dance{from{transform:rotate(-15deg) translateY(8px) scale(.92)}to{transform:rotate(15deg) translateY(-12px) scale(1.08)}}
+@keyframes flash{from{box-shadow:inset 0 0 0 rgba(118,17,39,0)}to{box-shadow:inset 0 0 100px rgba(118,17,39,.2)}}
+.bookcase{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+.book{min-height:125px;border:1px solid var(--line);border-radius:17px;padding:15px;cursor:pointer;background:linear-gradient(145deg,rgba(23,53,104,.38),rgba(118,17,39,.18));transition:.2s}
+.book:hover{transform:translateY(-5px)}
+.book b{display:block;margin-bottom:8px}
+.movie{font-size:4rem;text-align:center;margin:10px}
+.clue{border-left:2px solid var(--red);padding:12px 14px;background:rgba(118,17,39,.08);margin:10px 0;border-radius:0 12px 12px 0}
+.game-options{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}
+.option{padding:13px;border-radius:15px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:white;cursor:pointer;text-align:left}
+.option:hover{background:rgba(23,53,104,.35)}
+.petbattle{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:15px;text-align:center;margin-top:22px}
+.pet{font-size:4rem;cursor:pointer;padding:25px;border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.035)}
+.pet:hover{transform:translateY(-4px)}
+.vs{color:var(--rose);font-weight:800}
+.generator{font-size:1.15rem;line-height:1.8;padding:20px;border-radius:20px;background:rgba(23,53,104,.16);border:1px solid var(--line);min-height:115px}
+.breath{width:145px;height:145px;border-radius:50%;margin:25px auto;display:grid;place-items:center;
+ background:radial-gradient(circle,rgba(118,17,39,.36),rgba(23,53,104,.16));border:1px solid var(--line);
+ transition:transform 4s ease-in-out;box-shadow:0 0 70px rgba(118,17,39,.18)}
+.breath.inhale{transform:scale(1.35)}
+.center{text-align:center}
+.secret{display:none;margin-top:20px;padding:18px;border-radius:18px;background:rgba(118,17,39,.13);border:1px solid rgba(165,29,59,.2);line-height:1.65}
+footer{text-align:center;color:#6e7893;padding:40px 0 75px}
+.small{font-size:.82rem;color:#7d879f}
+#chaosScore{font-size:2rem;font-weight:800;color:var(--rose)}
+@media(max-width:720px){
+ .grid{grid-template-columns:1fr}.full{grid-column:auto}
+ .bookcase{grid-template-columns:1fr}.petbattle{grid-template-columns:1fr}.vs{order:2}
+ .moon{width:75px;height:75px;right:5vw;top:4vh}
+}
+</style>
+</head>
+<body>
+<div id="stars"></div><div class="moon"></div>
+
+<main>
+<section class="hero" id="top">
+ <div>
+  <div class="eyebrow">a tiny corner of the internet · 🐾</div>
+  <h1>The Little<br>Chaos Corner 🐈‍⬛</h1>
+  <p>
+   A place for dancing badly, reading too late,<br>
+   mysterious stories, tiny animals and questionable decisions.
+  </p>
+  <button class="primary" onclick="document.getElementById('world').scrollIntoView({behavior:'smooth'})">Enter the chaos →</button>
+ </div>
+</section>
+
+<section class="section" id="world">
+ <div class="section-title"><h2>Choose your current personality</h2><p>There are no consequences. Probably.</p></div>
+ <div class="card">
+  <div class="pillrow">
+   <button class="pill" data-mood="dance">💃 Dance mode</button>
+   <button class="pill" data-mood="cat">🐈 Cat energy</button>
+   <button class="pill" data-mood="book">📖 Book goblin</button>
+   <button class="pill" data-mood="mystery">🕵️ Mystery mode</button>
+   <button class="pill" data-mood="chaos">🌀 Maximum chaos</button>
+   <button class="pill" data-mood="sleep">😴 Human battery: 2%</button>
+  </div>
+  <div class="result" id="moodResult"></div>
+ </div>
+</section>
+
+<section class="section">
+ <div class="grid">
+  <div class="card">
+   <h3>🐈‍⬛ The Cat Department</h3>
+   <p>There is a cat here. It has absolutely no official responsibilities.</p>
+   <div class="kitty-stage" id="kittyStage">
+    <div class="kitty" id="kitty">🐈‍⬛</div>
+    <span class="paw" style="left:20%;animation-delay:0s">🐾</span>
+    <span class="paw" style="left:45%;animation-delay:2s">🐾</span>
+    <span class="paw" style="left:72%;animation-delay:4s">🐾</span>
+   </div>
+   <div class="result" id="catResult">Click the cat.</div>
+  </div>
+
+  <div class="card">
+   <h3>💃 Dance Mode</h3>
+   <p>Press the button only if you're prepared for completely unnecessary chaos.</p>
+   <div class="dance-zone" id="danceZone"><div class="dancer" id="dancer">🕺</div></div>
+   <div class="center" style="margin-top:16px">
+    <button class="primary" id="danceBtn">⚠ ENTER CHAOS MODE</button>
+   </div>
+  </div>
+
+  <div class="card full">
+   <h3>📚 The Extremely Serious Library</h3>
+   <p>Choose a shelf. We take reading very seriously here. Mostly.</p>
+   <div class="bookcase">
+    <div class="book" data-book="novel"><b>📖 NOVELS</b><span>Read one chapter. Accidentally finish half the book.</span></div>
+    <div class="book" data-book="manga"><b>📕 MANGA</b><span>Just one more volume. Famous last words.</span></div>
+    <div class="book" data-book="anime"><b>📺 ANIME</b><span>One episode before bed. Sure. Absolutely.</span></div>
+   </div>
+   <div class="result" id="bookResult"></div>
+  </div>
+
+  <div class="card">
+   <h3>🎬 The Mystery Room</h3>
+   <p>A fictional mystery. Three clues. One ridiculous answer.</p>
+   <div class="movie">🕯️</div>
+   <div id="clues">
+    <div class="clue">Clue 1: The room was locked from the inside.</div>
+    <div class="clue">Clue 2: Something smelled suspiciously like fish.</div>
+    <div class="clue">Clue 3: Tiny footprints were found near the window.</div>
+   </div>
+   <button class="primary" id="solveBtn">Solve the mystery</button>
+   <div class="result" id="mysteryResult"></div>
+  </div>
+
+  <div class="card">
+   <h3>🌈 Story Mood Generator</h3>
+   <p>Pick a vibe and receive a completely fictional story seed.</p>
+   <div class="pillrow">
+    <button class="pill storyMood" data-story="soft">🌸 Soft</button>
+    <button class="pill storyMood" data-story="dramatic">🔥 Dramatic</button>
+    <button class="pill storyMood" data-story="mysterious">🌙 Mysterious</button>
+    <button class="pill storyMood" data-story="chaotic">🌀 Chaotic</button>
+   </div>
+   <div class="generator" id="storyResult">Your next fictional universe is waiting...</div>
+  </div>
+
+  <div class="card full">
+   <h3>🐈 vs 🐕 The Most Important Scientific Question</h3>
+   <p>Choose your champion. The scientific community is watching.</p>
+   <div class="petbattle">
+    <button class="pet" data-pet="cat">🐈‍⬛<br><small>CAT</small></button>
+    <div class="vs">VS</div>
+    <button class="pet" data-pet="dog">🐕<br><small>DOG</small></button>
+   </div>
+   <div class="result center" id="petResult"></div>
+  </div>
+
+  <div class="card">
+   <h3>🌀 How Crazy Are You?</h3>
+   <p>Answer three completely scientific questions.</p>
+   <div id="quiz"></div>
+   <div id="chaosScore"></div>
+   <button class="primary" id="quizReset">Start / Restart</button>
+  </div>
+
+  <div class="card center">
+   <h3>🌿 One Tiny Reset</h3>
+   <p>Even chaos creatures need oxygen.</p>
+   <div class="breath" id="breath"><span id="breathText">ready?</span></div>
+   <button class="primary" id="breathBtn">Start breathing</button>
+   <p class="small">inhale → hold → exhale</p>
+  </div>
+
+  <div class="card full center">
+   <h3>🎲 I AM BORED</h3>
+   <p>Press this button and accept your fate.</p>
+   <button class="primary" id="randomBtn">DO SOMETHING RANDOM</button>
+   <div class="generator" id="randomResult">Waiting for chaos...</div>
+  </div>
+
+  <div class="card full center">
+   <h3>🔐 Suspicious Button</h3>
+   <p>There is definitely nothing interesting here.</p>
+   <button class="secondary" id="secretBtn">Investigate anyway</button>
+   <div class="secret" id="secret">
+    You found a completely unnecessary secret. 😂<br><br>
+    Achievement unlocked: <b>Professional Button Investigator</b> 🏆<br><br>
+    Your reward is permission to do absolutely nothing for five minutes.
+   </div>
+  </div>
+ </div>
+</section>
+
+<footer>
+ Made for tiny breaks, questionable decisions and good stories. 🐾
+ <br><br><a href="#top" style="text-decoration:none">back to the moon ↑</a>
+</footer>
+</main>
+
+<script>
+const stars=document.getElementById('stars');
+for(let i=0;i<130;i++){
+ const s=document.createElement('span');s.className='star';
+ const size=1+Math.random()*2.5;s.style.width=size+'px';s.style.height=size+'px';
+ s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';
+ s.style.opacity=.15+Math.random()*.7;s.style.animationDelay=Math.random()*4+'s';
+ stars.appendChild(s);
+}
+
+const moodText={
+ dance:"The floor is now legally considered a dance floor. 💃",
+ cat:"No thoughts. Only paws. 🐾",
+ book:"Cancel all plans. There is a chapter to finish. 📖",
+ mystery:"Trust nobody. Especially the cat. 🕵️",
+ chaos:"Excellent. Please keep all limbs inside the vehicle. 🌀",
+ sleep:"Battery critically low. Find blanket immediately. 😴"
+};
+document.querySelectorAll('[data-mood]').forEach(b=>{
+ b.addEventListener('click',()=>{
+  document.querySelectorAll('[data-mood]').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');document.getElementById('moodResult').textContent=moodText[b.dataset.mood];
+ });
+});
+
+const catLines=[
+ "The cat has judged you. Verdict: acceptable.",
+ "Meow. That was the entire message.",
+ "The cat requests snacks.",
+ "You clicked the cat. The cat will remember this.",
+ "The cat is pretending not to care.",
+ "🐾 *tiny suspicious stare*",
+ "The cat has important cat business. Please leave."
+];
+document.getElementById('kitty').addEventListener('click',()=>{
+ document.getElementById('catResult').textContent=catLines[Math.floor(Math.random()*catLines.length)];
+ const k=document.getElementById('kitty');k.style.transform='scale(1.25) rotate('+(Math.random()*20-10)+'deg)';
+ setTimeout(()=>k.style.transform='',300);
+});
+
+const danceBtn=document.getElementById('danceBtn'),zone=document.getElementById('danceZone');
+danceBtn.addEventListener('click',()=>{
+ zone.classList.toggle('chaos');
+ danceBtn.textContent=zone.classList.contains('chaos')?'🛑 PLEASE STOP THE CHAOS':'⚠ ENTER CHAOS MODE';
+ document.getElementById('dancer').textContent=zone.classList.contains('chaos')?'💃':'🕺';
+});
+
+const bookText={
+ novel:"Plot twist: the 'one chapter' has become four chapters. There is no escape.",
+ manga:"Volume acquired. Self-control has left the building.",
+ anime:"Episode 1 at 9 PM. Episode 11 at 2:47 AM. A classic scientific phenomenon."
+};
+document.querySelectorAll('.book').forEach(b=>b.addEventListener('click',()=>{
+ document.getElementById('bookResult').textContent=bookText[b.dataset.book];
+}));
+
+document.getElementById('solveBtn').addEventListener('click',()=>{
+ document.getElementById('mysteryResult').textContent=
+ "CASE SOLVED: The cat did it. Obviously. It wanted the fish and the locked room was merely dramatic flair. 🐈‍⬛";
+});
+
+const stories={
+ soft:["Two strangers keep leaving handwritten notes inside the same library book, never knowing they are reading each other's thoughts."],
+ dramatic:["A forgotten train arrives at midnight once every ten years. One passenger boards knowing they may never return."],
+ mysterious:["Every night at 2:13 AM, one window in an empty building lights up. Tonight, someone waves from inside."],
+ chaotic:["A perfectly ordinary student wakes up with a magical cat, a stolen crown, and absolutely no memory of yesterday."]
+};
+document.querySelectorAll('.storyMood').forEach(b=>b.addEventListener('click',()=>{
+ document.getElementById('storyResult').textContent=stories[b.dataset.story][0];
+}));
+
+document.querySelectorAll('.pet').forEach(p=>p.addEventListener('click',()=>{
+ const pet=p.dataset.pet;
+ const text=pet==='cat'
+ ? "CAT WINS. The judges were intimidated by the stare. 🐈‍⬛🏆"
+ : "DOG WINS. Pure enthusiasm has defeated logic. 🐕🏆";
+ document.getElementById('petResult').textContent=text;
+}));
+
+const questions=[
+ {q:"It's 2 AM. What are you doing?",a:["Sleeping like a responsible human","Reading / manga","Watching one more episode","Questioning existence"]},
+ {q:"You see a mysterious door.",a:["Walk away","Open it carefully","Kick it open dramatically","Ask the cat first"]},
+ {q:"You have one free evening.",a:["Rest","Read","Watch something","Invent a completely unnecessary adventure"]}
+];
+let qi=0,score=0;
+function renderQuiz(){
+ const box=document.getElementById('quiz');
+ if(qi>=questions.length){
+  let msg=score<=2?"Mildly chaotic. Suspiciously responsible.":score<=5?"Certified little chaos creature™.":"ABSOLUTE MENACE. The cat is proud.";
+  document.getElementById('chaosScore').textContent=msg;
+  box.innerHTML="";
+  return;
+ }
+ const q=questions[qi];
+ box.innerHTML='<p><b>'+q.q+'</b></p>'+q.a.map((x,i)=>'<button class="option" data-i="'+i+'">'+x+'</button>').join('');
+ box.querySelectorAll('.option').forEach(b=>b.addEventListener('click',()=>{
+  score+=Number(b.dataset.i);qi++;renderQuiz();
+ }));
+}
+document.getElementById('quizReset').addEventListener('click',()=>{qi=0;score=0;document.getElementById('chaosScore').textContent='';renderQuiz()});
+renderQuiz();
+
+const breath=document.getElementById('breath'),bt=document.getElementById('breathText'),bb=document.getElementById('breathBtn');
+let breathing=false,timer;
+function cycle(){
+ if(!breathing)return;
+ bt.textContent='inhale';breath.classList.add('inhale');
+ timer=setTimeout(()=>{if(!breathing)return;bt.textContent='hold';
+  timer=setTimeout(()=>{if(!breathing)return;bt.textContent='exhale';breath.classList.remove('inhale');
+   timer=setTimeout(cycle,4000)},2000)
+ },4000)
+}
+bb.addEventListener('click',()=>{breathing=!breathing;clearTimeout(timer);
+ if(breathing){bb.textContent='Stop';cycle()}else{bb.textContent='Start breathing';bt.textContent='ready?';breath.classList.remove('inhale')}});
+
+const randomThings=[
+"Do a completely unnecessary dance for 20 seconds. 💃",
+"Find the nearest animal and respectfully admire it. 🐾",
+"Read one page of something you like.",
+"Make up a fictional character with the worst superpower possible.",
+"Look outside for one minute and find the weirdest thing you can see.",
+"Send someone a ridiculous sticker.",
+"Learn one random fact.",
+"Draw a cat without lifting the pen from the page.",
+"Put on one song and pretend you're in an anime opening.",
+"Drink some water. Yes, this counts as an adventure."
+];
+document.getElementById('randomBtn').addEventListener('click',()=>{
+ document.getElementById('randomResult').textContent=randomThings[Math.floor(Math.random()*randomThings.length)];
+});
+document.getElementById('secretBtn').addEventListener('click',()=>{
+ const x=document.getElementById('secret');x.style.display=x.style.display==='block'?'none':'block';
+});
+</script>
+</body>
+</html>
